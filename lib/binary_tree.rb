@@ -165,18 +165,39 @@ class BinaryTree
     [@left, @right]
   end
 
+  alias_method :childs, :children
+
   ##
   # will find the first subtree whose value matches +search_val+
 
   def get_first(search_val)
+    tree = self
 
-    bfs_each do |val, tree|
-      if tree && tree.value == search_val
-        return tree
+    until tree.nil? || tree.value == search_val
+      if search_val < tree.value
+        tree = tree.left
+      else
+        tree = tree.right
       end
     end
 
+    return tree
   end
+
+  def get_child_with_val(val)
+    children.each do |t|
+      if (t && t.value == val)
+        return t
+      end
+    end
+
+    return nil
+  end
+
+  ##
+  # returns a hash of array values
+  # containing the values from each
+  # level of the tree
 
   def levels
     levels = {} # starts at level 1
@@ -191,5 +212,22 @@ class BinaryTree
 
     levels
   end
+
+  def parent_of(tree)
+    parent = self
+    parent = nil if tree == self
+
+    until parent.nil? || (parent.left == tree || parent.right == tree)
+      if tree.value < parent.value
+        parent = parent.left
+      else
+        parent = parent.right
+      end
+    end
+
+    parent 
+  end
+
+
 
 end

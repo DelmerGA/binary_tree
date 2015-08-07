@@ -1,5 +1,9 @@
 module Iterator
 
+  ##
+  # traverses breadth first through
+  # a tree using a loop and queue 
+
   def bfs_each(&block)
     queue = Queue.new
     queue << self
@@ -14,6 +18,11 @@ module Iterator
 
     return self
   end
+
+  ##
+  # traverses bread first and tracks
+  # the level changes as the the tree
+  # grows
 
   def bfs_each_with_level(&block)
     curr_depth = 0
