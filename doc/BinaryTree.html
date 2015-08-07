@@ -62,7 +62,18 @@
   
 </div>
 
-    
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="Iterator.html">Iterator</a>
+  
+  
+  </ul>
+</div>
+
     
     <!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
@@ -72,6 +83,14 @@
     
     <li ><a href="#method-c-new">::new</a>
     
+    <li ><a href="#method-i-child_count">#child_count</a>
+    
+    <li ><a href="#method-i-children">#children</a>
+    
+    <li ><a href="#method-i-count">#count</a>
+    
+    <li ><a href="#method-i-get_first">#get_first</a>
+    
     <li ><a href="#method-i-height">#height</a>
     
     <li ><a href="#method-i-include-3F">#include?</a>
@@ -79,6 +98,8 @@
     <li ><a href="#method-i-insert">#insert</a>
     
     <li ><a href="#method-i-leaf-3F">#leaf?</a>
+    
+    <li ><a href="#method-i-levels">#levels</a>
     
     <li ><a href="#method-i-to_arr">#to_arr</a>
     
@@ -221,7 +242,7 @@ href="BinaryTree.html#attribute-i-right">right</a> for usage.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/binary_tree.rb, line 58</span>
+            <pre><span class="ruby-comment"># File lib/binary_tree.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">val</span>=<span class="ruby-keyword">nil</span>)
   <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">val</span>
 <span class="ruby-keyword">end</span></pre>
@@ -243,6 +264,143 @@ href="BinaryTree.html#attribute-i-right">right</a> for usage.</p>
        </header>
 
     
+      <div id="method-i-child_count" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">child_count</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="child_count-source">
+            <pre><span class="ruby-comment"># File lib/binary_tree.rb, line 158</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">child_count</span>
+  <span class="ruby-ivar">@child_count</span> = <span class="ruby-identifier">children</span>.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">length</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="BinaryTree.html#method-i-count">count</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-children" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">children</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="children-source">
+            <pre><span class="ruby-comment"># File lib/binary_tree.rb, line 164</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">children</span>
+  [<span class="ruby-ivar">@left</span>, <span class="ruby-ivar">@right</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-count" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">count</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="BinaryTree.html#method-i-child_count">child_count</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-get_first" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_first</span><span
+            class="method-args">(search_val)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>will find the first subtree whose value matches <code>search_val</code></p>
+          
+          
+
+          
+          <div class="method-source-code" id="get_first-source">
+            <pre><span class="ruby-comment"># File lib/binary_tree.rb, line 171</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_first</span>(<span class="ruby-identifier">search_val</span>)
+
+  <span class="ruby-identifier">bfs_each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span>, <span class="ruby-identifier">tree</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">tree</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">search_val</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-identifier">tree</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-height" class="method-detail ">
         
         <div class="method-heading">
@@ -257,14 +415,22 @@ href="BinaryTree.html#attribute-i-right">right</a> for usage.</p>
         <div class="method-description">
           
           <p>Will calculate the height of  a <a href="BinaryTree.html">BinaryTree</a> by
-traversing  each sub-tree</p>
+traversing  each level of the tree to find  the max_level which is just 1 
+greater than the height</p>
           
           
 
           
           <div class="method-source-code" id="height-source">
-            <pre><span class="ruby-comment"># File lib/binary_tree.rb, line 108</span>
+            <pre><span class="ruby-comment"># File lib/binary_tree.rb, line 134</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">height</span>
+  <span class="ruby-identifier">max_level</span> = <span class="ruby-value">1</span>
+
+  <span class="ruby-identifier">bfs_each_with_level</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-operator">*</span><span class="ruby-identifier">args</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">max_level</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span> 
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">max_level</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
 
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -297,9 +463,16 @@ traversing  each sub-tree</p>
 
           
           <div class="method-source-code" id="include-3F-source">
-            <pre><span class="ruby-comment"># File lib/binary_tree.rb, line 99</span>
+            <pre><span class="ruby-comment"># File lib/binary_tree.rb, line 116</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">include?</span>(<span class="ruby-identifier">val</span>)
 
+  <span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">val</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -315,7 +488,7 @@ traversing  each sub-tree</p>
         
         <div class="method-heading">
           <span class="method-name">insert</span><span
-            class="method-args">(val)</span>
+            class="method-args">(new_val)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -348,8 +521,22 @@ respectively.</p>
 
           
           <div class="method-source-code" id="insert-source">
-            <pre><span class="ruby-comment"># File lib/binary_tree.rb, line 90</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert</span>(<span class="ruby-identifier">val</span>)
+            <pre><span class="ruby-comment"># File lib/binary_tree.rb, line 93</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert</span>(<span class="ruby-identifier">new_val</span>)
+
+  <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@value</span>.<span class="ruby-identifier">nil?</span>)
+    <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">new_val</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">new_val</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@value</span>
+      <span class="ruby-ivar">@left</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">BinaryTree</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-ivar">@left</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-identifier">new_val</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@right</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">BinaryTree</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-ivar">@right</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-identifier">new_val</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">self</span>
 
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -382,9 +569,52 @@ respectively.</p>
 
           
           <div class="method-source-code" id="leaf-3F-source">
-            <pre><span class="ruby-comment"># File lib/binary_tree.rb, line 66</span>
+            <pre><span class="ruby-comment"># File lib/binary_tree.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">leaf?</span>
+  <span class="ruby-ivar">@left</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@right</span>.<span class="ruby-identifier">nil?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
 
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-levels" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">levels</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="levels-source">
+            <pre><span class="ruby-comment"># File lib/binary_tree.rb, line 181</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">levels</span>
+  <span class="ruby-identifier">levels</span> = {} <span class="ruby-comment"># starts at level 1</span>
+
+  <span class="ruby-identifier">bfs_each_with_level</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-operator">*</span><span class="ruby-identifier">args</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">tree</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">1</span>]
+    <span class="ruby-identifier">lvl</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>
+
+    <span class="ruby-identifier">levels</span>[<span class="ruby-identifier">lvl</span>] <span class="ruby-operator">||=</span> []
+    <span class="ruby-identifier">levels</span>[<span class="ruby-identifier">lvl</span>].<span class="ruby-identifier">push</span>(<span class="ruby-identifier">tree</span>.<span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">levels</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -415,9 +645,15 @@ respectively.</p>
 
           
           <div class="method-source-code" id="to_arr-source">
-            <pre><span class="ruby-comment"># File lib/binary_tree.rb, line 115</span>
+            <pre><span class="ruby-comment"># File lib/binary_tree.rb, line 148</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_arr</span>
+  <span class="ruby-identifier">arr</span> = []
 
+  <span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">arr</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">val</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">arr</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

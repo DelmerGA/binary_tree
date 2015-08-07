@@ -1,3 +1,5 @@
+require_relative "./iterators_module"
+
 ##
 # This class represents a *sorted*
 # tree with _exactly_ _two_ _subtrees_.
@@ -6,6 +8,7 @@
 
 class BinaryTree
 
+  include Iterator
 
   attr_accessor :value, :left, :right
 
@@ -64,7 +67,7 @@ class BinaryTree
   # +@left+ and +@right+ subtrees are +nil+
 
   def leaf?
-
+    @left.nil? && @right.nil?
   end
 
   ##
@@ -93,7 +96,7 @@ class BinaryTree
       @value = new_val
     else
       if new_val < @value
-        @left = @left || BinaryTree.new
+        @left ||= BinaryTree.new
         @left.insert(new_val)
       else
         @right ||= BinaryTree.new
@@ -101,15 +104,8 @@ class BinaryTree
       end
     end
 
-    # Terminal Condition
-      # if value of tree is nil
-      #   then set value to new_val
-    # Recursive Condition
-      # else 
-      #   if new_val less than value
-      #      then left.insert(new_val)
-      #   else then it's greater than equal to
-      #      so then we right.insert(new_val)
+    self
+
   end
 
   ##
@@ -119,22 +115,81 @@ class BinaryTree
 
   def include?(val)
 
+    each do |value|
+      if value == val
+        return true
+      end
+    end
+
+    return false
   end
 
   ##
   # Will calculate the height of 
   # a BinaryTree by traversing 
-  # each sub-tree  
+  # each level of the tree to find 
+  # the max_level which is just 1 
+  # greater than the height
 
   def height
-  
+    max_level = 1
+
+    bfs_each_with_level do |*args|
+      max_level = args.last 
+    end
+
+    return max_level - 1
+
   end
 
   ##
   # method to convert the tree to a sorted array
 
   def to_arr
+    arr = []
 
+    each do |val|
+      arr.push(val)
+    end
+
+    return arr
+  end
+
+  def child_count
+    @child_count = children.compact.length
+  end
+
+  alias_method :count, :child_count
+
+  def children
+    [@left, @right]
+  end
+
+  ##
+  # will find the first subtree whose value matches +search_val+
+
+  def get_first(search_val)
+
+    bfs_each do |val, tree|
+      if tree && tree.value == search_val
+        return tree
+      end
+    end
+
+  end
+
+  def levels
+    levels = {} # starts at level 1
+
+    bfs_each_with_level do |*args|
+      tree = args[1]
+      lvl = args.last
+
+      levels[lvl] ||= []
+      levels[lvl].push(tree.value)
+    end
+
+    levels
   end
 
 end
